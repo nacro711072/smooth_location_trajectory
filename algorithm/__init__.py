@@ -20,18 +20,24 @@ class Ration:
     def __init__(self, data_list, size=3):
         new_points = [data_list[0]]
         buffer = data_list[:size]
-        for i in range(1, len(data_list) - (size - 1)):
+        for i in range(1, len(data_list) - (size - 2)):
             ratio = util.calculate_ratio(buffer)
             if self.__any_ratio_too_big(ratio):
-                buffer = [buffer[0], buffer[size - 1]] + [data_list[i + (size - 1) + j] for j in range(size - 1)]
+                next_end_index = i + size + (size - 2)
+                if next_end_index < len(data_list):
+                    buffer = [buffer[0], buffer[-1]] + [data_list[i + size + j] for j in range(size - 2)]
+                else:
+                    buffer = [buffer[0], buffer[-1]]
             else:
                 new_points.append(data_list[i])
                 buffer = data_list[i: i + size]
-        new_points.extend(data_list[-size:-1])
+        new_points.extend(buffer)
         self.new_points = new_points
 
     def __any_ratio_too_big(self, ratio):
         for r in ratio[1:]:
+            if ratio[0] == 0.0:
+                return True
             if r / ratio[0] > 1.2:
                 return True
         return False
