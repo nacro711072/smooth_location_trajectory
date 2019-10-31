@@ -17,7 +17,8 @@ class MinDistance:
 
 
 class Ration:
-    def __init__(self, data_list, size=3):
+    def __init__(self, data_list, size=3, max_ratio=1.2):
+        self.max_ratio = max_ratio
         new_points = [data_list[0]]
         buffer = data_list[:size]
         for i in range(1, len(data_list) - (size - 2)):
@@ -35,9 +36,9 @@ class Ration:
         self.new_points = new_points
 
     def __any_ratio_too_big(self, ratio):
+        if ratio[0] == 0.0:
+            return True
         for r in ratio[1:]:
-            if ratio[0] == 0.0:
-                return True
-            if r / ratio[0] > 1.2:
+            if r / ratio[0] > self.max_ratio:
                 return True
         return False
