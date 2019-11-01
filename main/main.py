@@ -9,20 +9,16 @@ import algorithm
 
 if __name__ == "__main__":
 
-    target_name = "263991"
+    target_name = "264604"
     with open('../data/good/{}.csv'.format(target_name)) as csv_file:
         rows = csv.reader(csv_file)
         data_latlng = [(float(x[1]), float(x[2])) for x in rows]
 
     lats, lngs = zip(*data_latlng)
 
-    # distances = util.latlon_distance_all(data_latlng)
-    # print(distances)
-    new_points1 = algorithm.MinDistance(data_latlng[24:]).new_points
-    # print(new_points[1:3])
-    # util.calculate_ratio(new_points[:4])
-    new_points2 = algorithm.Ration(new_points1, 4, 1.2).new_points
-    new_points3 = algorithm.Ration(new_points2, 3, 1.5).new_points
+    new_points1 = algorithm.min_distance(data_latlng)
+    new_points2 = algorithm.radian_method(new_points1, 30)
+    new_points3 = algorithm.method1(data_latlng)
 
     print("ori: {}, new: {}".format(data_latlng.__len__(), new_points2.__len__()))
     print("ori: {}, new: {}".format(data_latlng.__len__(), new_points3.__len__()))
