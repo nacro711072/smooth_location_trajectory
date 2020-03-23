@@ -1,4 +1,4 @@
-from math import sin, cos, sqrt, atan2, radians
+from math import sin, cos, sqrt, atan2, radians, acos
 
 
 def latlon_distance_all(args):
@@ -25,14 +25,27 @@ def latlon_distance(location1_lat, location1_lng, location2_lat, location2_lng):
     return R * c * 1000
 
 
-def calculate_ratio(points):
-    return [latlon_distance(points[i][0],
-                            points[i][1],
-                            points[i + 1][0],
-                            points[i + 1][1])
-            for i in range(-1, len(points) - 1)]
+def radian(x):
+    """
+    inner product a * b = |a| * |b| * cos(x)
+    """
+    a = [x[1][0] - x[0][0], x[1][1] - x[0][1]]
+    b = [x[1][0] - x[2][0], x[1][1] - x[2][1]]
+    abs_ab = ((a[0] ** 2 + a[1] ** 2) * (b[0] ** 2 + b[1] ** 2)) ** 0.5
+    if abs_ab == 0:
+        return 0
+    ab = a[0] * b[0] + a[1] * b[1]
+    ratio = ab / abs_ab
+    if ratio > 1.0:
+        return acos(1)
+    elif ratio < -1.0:
+        return acos(-1)
+    return acos(ab / abs_ab)
 
-# if __name__ == "__main__":
-#     points = [(1, 1), (2, 2), (3, 3), (4, 4)]
-#     for i in range(-1, len(points) - 1):
-#         print(points[i], points[i + 1])
+
+if __name__ == "__main__":
+    points = [(25.122605, 121.46332166666700), (25.137005, 121.49951666666700)]
+    diff_t = (1572550444622 - 1572550324623) / 1000 / 60 / 60
+    print(diff_t)
+    speed = latlon_distance(25.122605, 121.46332166666700, 25.137005, 121.49951666666700) / 1000 / diff_t
+    print(speed)

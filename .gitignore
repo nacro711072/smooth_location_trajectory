@@ -4,3 +4,17 @@ venv/
 .idea/
 
 *.pyc
+
+data/bad/274925.csv
+
+data/bad/361520.csv
+
+data/bad/311387.csv
+
+data/bad/332117.csv
+
+data/bad/339367.csv
+
+data/bad/339894.csv
+
+data/bad/348873.csv
