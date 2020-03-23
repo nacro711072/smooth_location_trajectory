@@ -25,14 +25,6 @@ def latlon_distance(location1_lat, location1_lng, location2_lat, location2_lng):
     return R * c * 1000
 
 
-def calculate_ratio(points):
-    return [latlon_distance(points[i][0],
-                            points[i][1],
-                            points[i + 1][0],
-                            points[i + 1][1])
-            for i in range(-1, len(points) - 1)]
-
-
 def radian(x):
     """
     inner product a * b = |a| * |b| * cos(x)
