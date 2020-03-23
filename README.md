@@ -11,13 +11,14 @@ gps_modify_triangle_algorithms
 
 # 結果
 
-原圖
+原圖：
 
 ![Origin](/screenshot/origin_trajectory.png)
 
-套用後:
+套用後：
 
 ![New](/screenshot/new_trajactory.png)
 
 
 # Blog
+[Android GPS 路徑優化](https://medium.com/@nacro711072/android-gps-路徑優化-4f30ad5da671)
